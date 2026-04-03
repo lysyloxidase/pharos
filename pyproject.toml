@@ -1,0 +1,78 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pharos"
+version = "0.1.0"
+description = "Platform for Hypothesis-driven Autonomous Research, Orchestration & Synthesis"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+authors = [{ name = "PHAROS Team" }]
+keywords = ["biomedical", "multi-agent", "llm", "knowledge-graph", "drug-discovery"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+dependencies = [
+    "langgraph>=0.2",
+    "langchain-ollama",
+    "neo4j>=5.0",
+    "pydantic>=2.0",
+    "pydantic-settings",
+    "httpx",
+    "chainlit",
+    "rdkit-pypi",
+    "biopython",
+    "sentence-transformers",
+    "tenacity",
+    "pyyaml",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "ruff",
+    "mypy",
+    "types-PyYAML",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+markers = ["slow: marks tests as slow (deselect with '-m \"not slow\"')"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 99
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "B", "SIM", "TCH"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+plugins = ["pydantic.mypy"]
+exclude = ["tests/", "scripts/", "pharos/ui/"]
+
+[[tool.mypy.overrides]]
+module = [
+    "esm.*",
+    "torch.*",
+    "transformers.*",
+    "rdkit.*",
+    "langgraph.*",
+    "neo4j.*",
+]
+ignore_missing_imports = true
+allow_untyped_calls = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["pharos"]

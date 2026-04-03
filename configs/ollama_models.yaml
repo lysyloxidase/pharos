@@ -1,0 +1,50 @@
+# Ollama model assignments per PHAROS agent / function
+#
+# Adjust based on available VRAM. Models are loaded on-demand by Ollama.
+
+agents:
+  router:
+    model: "llama3.2:3b"
+    description: "Fast task classification and routing"
+    vram_gb: 2
+
+  oracle:
+    model: "llama3.1:8b"
+    description: "Biomedical forecasting and trend analysis"
+    vram_gb: 5
+
+  scribe:
+    model: "llama3.1:8b"
+    description: "Literature review writing"
+    vram_gb: 5
+
+  cartographer:
+    model: "llama3.1:8b"
+    description: "Entity and relation extraction for KG"
+    vram_gb: 5
+
+  alchemist:
+    model: "qwen2.5-coder:32b"
+    description: "Molecular design with SMILES generation"
+    vram_gb: 20
+
+  architect:
+    model: "llama3.3:70b"
+    description: "Protein design and analysis"
+    vram_gb: 42
+
+  sentinel:
+    model: "phi4:14b"
+    description: "Fact-checking and verification"
+    vram_gb: 9
+
+tools:
+  extractor:
+    model: "llama3.1:8b"
+    description: "Biomedical NER and relation extraction"
+    vram_gb: 5
+
+  embeddings:
+    model: "all-minilm:l6-v2"
+    description: "Sentence embeddings for semantic search"
+    vram_gb: 0.5

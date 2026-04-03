@@ -1,0 +1,70 @@
+# Neo4j knowledge-graph schema definition
+#
+# Used by setup_schema() to create constraints and indexes.
+
+node_types:
+  - name: Gene
+    properties: [name, symbol, organism, description]
+    constraints:
+      - type: unique
+        property: name
+
+  - name: Disease
+    properties: [name, mondo_id, icd10, description]
+    constraints:
+      - type: unique
+        property: name
+
+  - name: Drug
+    properties: [name, drugbank_id, phase, description]
+    constraints:
+      - type: unique
+        property: name
+
+  - name: Protein
+    properties: [name, uniprot_id, sequence, organism, description]
+    constraints:
+      - type: unique
+        property: name
+
+  - name: Pathway
+    properties: [name, reactome_id, description]
+    constraints:
+      - type: unique
+        property: name
+
+  - name: Compound
+    properties: [name, smiles, inchi, molecular_weight, description]
+    constraints:
+      - type: unique
+        property: name
+
+  - name: Phenotype
+    properties: [name, hp_id, description]
+    constraints:
+      - type: unique
+        property: name
+
+  - name: Anatomy
+    properties: [name, uberon_id, description]
+    constraints:
+      - type: unique
+        property: name
+
+relation_types:
+  - TARGETS
+  - TREATS
+  - CAUSES
+  - ASSOCIATED_WITH
+  - INTERACTS_WITH
+  - PART_OF
+  - REGULATES
+  - EXPRESSED_IN
+  - ENCODES
+  - INHIBITS
+  - ACTIVATES
+
+fulltext_indexes:
+  - name: entity_fulltext
+    labels: [Gene, Disease, Drug, Protein, Pathway, Compound, Phenotype, Anatomy]
+    properties: [name, description]
